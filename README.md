@@ -1,4 +1,4 @@
 # mphy0021-2019-travel-planner-yue1101
 
-hello!
+Hello!
 This is my coursework
