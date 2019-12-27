@@ -2,13 +2,13 @@ from travelplanner.route import Route
 
 
 def test_constructor():
-    filename = 'random_route.csv'
-    route = Route('random_route.csv')
+    filename = 'travelplanner/tests/random_route.csv'
+    route = Route('travelplanner/tests/random_route.csv')
     assert route.filename == filename
 
 
 def test_read_routes():
-    route = Route('random_route.csv')
+    route = Route('travelplanner/tests/random_route.csv')
     assert route.read_routes() == [(10, 8, 'A'),
                                    (10, 7, ''),
                                    (10, 6, ''),
@@ -41,7 +41,7 @@ def test_read_routes():
 
 
 def test_timetable():
-    route = Route('random_route.csv')
+    route = Route('travelplanner/tests/random_route.csv')
     assert route.timetable() == {'A': 0,
                                  'B': 150,
                                  'C': 160,
@@ -50,6 +50,6 @@ def test_timetable():
 
 
 def route_cc():
-    route = Route('random_route.csv')
+    route = Route('travelplanner/tests/random_route.csv')
     assert route.route_cc() == ((10, 8),
                                 '2222244444446666066666664444')
