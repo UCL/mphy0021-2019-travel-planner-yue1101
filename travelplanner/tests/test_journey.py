@@ -13,7 +13,7 @@ def test_constructor():
 
 
 def test_passenger_trip():
-    route = Route('travelplanner/tests/random_route.csv').read_routes()
+    route = Route('travelplanner/tests/random_route.csv')
     passengers = read_passengers('travelplanner/tests/random_passengers.csv')
     journey = Journey(route, passengers)
     passenger = passengers[0]
