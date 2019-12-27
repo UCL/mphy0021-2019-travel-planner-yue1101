@@ -6,6 +6,7 @@ def test_constructor():
     route = Route('random_route.csv')
     assert route.filename == filename
 
+
 def test_read_routes():
     route = Route('random_route.csv')
     assert route.read_routes() == [(10, 8, 'A'), 
