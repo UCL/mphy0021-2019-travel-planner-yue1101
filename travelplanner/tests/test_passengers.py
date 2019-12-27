@@ -13,4 +13,4 @@ def test_fail_walk_time():
         passenger = Passengers([2, 8], (24, 2), 13)
         if type(passenger.start_point) != tuple:
             raise ValueError('Input(start_point) type is invalid!')
-    assert exc_info.type == ValueError  
+    assert exc_info.type == ValueError
