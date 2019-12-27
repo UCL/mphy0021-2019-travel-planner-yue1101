@@ -8,8 +8,8 @@ def test_constructor():
     route = Route('travelplanner/tests/random_route.csv').read_routes()
     passengers = read_passengers('travelplanner/tests/random_passengers.csv')
     journey = Journey(route, passengers)
-    assert journey.route = route
-    assert journey.passengers = passengers
+    assert journey.route == route
+    assert journey.passenger == passengers
 
 
 def test_passenger_trip():
