@@ -1,6 +1,6 @@
 language: python
-python:     
-# current default Python on Travis CI
+python:
+  # current default Python on Travis CI
   - "3.7"
 # command to install dependencies
 install:
@@ -9,3 +9,4 @@ install:
 script:
   - pytest -v --pep8 travelplanner/tests/test_passengers.py
   - pytest -v --pep8 travelplanner/tests/test_route.py
+  - pytest -v --pep8 travelplanner/tests/test_journey.py
