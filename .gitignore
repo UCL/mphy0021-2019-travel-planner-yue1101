@@ -1,0 +1,6 @@
+.pytest_cache/
+.DS_Store
+tests/__pycache__/
+travelplanner/__pycache__/
+travelplanner/*.pyc
+
