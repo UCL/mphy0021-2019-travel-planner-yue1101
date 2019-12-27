@@ -26,4 +26,4 @@ def test_travel_time():
     route = Route('travelplanner/tests/random_route.csv')
     passengers = read_passengers('travelplanner/tests/random_passengers.csv')
     total_time = Journey(route, passengers).travel_time(passenger_id)
-    assert total_time = approx(56.3948, abs=1e-4)
+    assert total_time == approx(56.3948, abs=1e-4)
