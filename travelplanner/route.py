@@ -12,6 +12,11 @@ class Route:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
                       for line in lines]
+        chain_codes = self.route_cc()
+        wrong_directions = ['1', '3', '5', '7']
+        for cc in chain_codes:
+            if cc in wrong_directions:
+                assert ValueError('Wrong direction! Cannot not go diaganoly!')
         return routes
 
     def plot_map(self):
@@ -29,7 +34,7 @@ class Route:
         ax.set_aspect('equal', 'datalim')
         plt.show()
 
-    def timetable(self):
+    def timetable(self, bus_speed=10):
         '''     
         Generates a timetable for a route as minutes from its first stop. 
         '''
@@ -39,7 +44,7 @@ class Route:
         for step in route:
             if step[2]:
                 stops[step[2]] = time
-            time += 10
+            time += bus_speed
         return stops
 
     def route_cc(self):

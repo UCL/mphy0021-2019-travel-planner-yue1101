@@ -8,7 +8,7 @@ def test_constructor():
 
 
 def test_read_routes():
-    route = Route('travelplanner/tests/random_route.csv')
+    route = Route('travelplanner/tests/random_route1.csv')
     assert route.read_routes() == [(10, 8, 'A'),
                                    (10, 7, ''),
                                    (10, 6, ''),
