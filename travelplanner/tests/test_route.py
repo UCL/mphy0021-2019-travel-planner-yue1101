@@ -1,4 +1,5 @@
 from travelplanner.route import Route
+from pytest import raises
 
 
 def test_constructor():
@@ -7,8 +8,15 @@ def test_constructor():
     assert route.filename == filename
 
 
+def test_fail_read_routes():
+    with raises(ValueError) as rs:
+        route = Route('travelplanner/tests/random_route1.csv')
+        route.read_routes()
+    assert rs.type == ValueError
+
+
 def test_read_routes():
-    route = Route('travelplanner/tests/random_route1.csv')
+    route = Route('travelplanner/tests/random_route.csv')
     assert route.read_routes() == [(10, 8, 'A'),
                                    (10, 7, ''),
                                    (10, 6, ''),
