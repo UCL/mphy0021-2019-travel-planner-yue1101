@@ -1,4 +1,12 @@
-# mphy0021-2019-travel-planner-yue1101
+Greetings! 
+==========
 
-Hello!
-This is my coursework
+This is the coursework1 of MPHY0021.
+
+
+Usage: 
+
+Invoke the tool with 
+
+`bussimula <routefile> <passfile> <--speed <bus_speed(number)>> [--saveplots]`
+TODO

@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+from .passengers import Passenger
 
 
 def read_passengers(file):

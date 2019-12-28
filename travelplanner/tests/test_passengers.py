@@ -21,3 +21,4 @@ def test_fail_walk_time():
         time = passenger.walk_time()
         if time != approx(296.4456, abs=1e-4):
             raise ValueError('Wrong inputs of passengers, please check!')
+    assert exc_info.type == ValueError

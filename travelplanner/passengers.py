@@ -2,9 +2,9 @@ import math
 
 
 class Passenger:
-    def __init__(self, start_point, end_point, speed):
-        self.start_point = start_point
-        self.end_point = end_point
+    def __init__(self, start, end, speed):
+        self.start_point = start
+        self.end_point = end
         self.speed = speed
 
     def walk_time(self):
