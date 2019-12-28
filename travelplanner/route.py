@@ -12,11 +12,11 @@ class Route:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
                       for line in lines]
-        chain_codes = self.route_cc()
+        chain_codes = self.route_cc(routes)
         wrong_directions = ['1', '3', '5', '7']
         for cc in chain_codes:
             if cc in wrong_directions:
-                assert ValueError('Wrong direction! Cannot not go diaganoly!')
+                assert ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
 
     def plot_map(self):
@@ -47,7 +47,7 @@ class Route:
             time += bus_speed
         return stops
 
-    def route_cc(self):
+    def route_cc(self, route):
         r'''
         Converts a set of route into a Freeman chain code
            3  2  1
@@ -56,7 +56,6 @@ class Route:
             / | \ 
            5  6  7 
         '''
-        route = self.read_routes()
         start = route[0][:2]
         cc = []
         freeman_cc2coord = {0: (1, 0),
