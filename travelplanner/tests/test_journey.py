@@ -7,7 +7,7 @@ from pytest import approx
 def test_constructor():
     route = Route('travelplanner/tests/random_route.csv').read_routes()
     passengers = read_passengers('travelplanner/tests/random_passengers.csv')
-    journey = Journey(route, passengers)
+    journey = Journey(passengers, route)
     assert journey.route == route
     assert journey.passenger == passengers
 
@@ -15,7 +15,7 @@ def test_constructor():
 def test_passenger_trip():
     route = Route('travelplanner/tests/random_route.csv')
     passengers = read_passengers('travelplanner/tests/random_passengers.csv')
-    journey = Journey(route, passengers)
+    journey = Journey(passengers, route)
     passenger = passengers[0]
     assert journey.passenger_trip(passenger) == (
         (1.4142135623730951, 'C'), (15.231546211727817, 'A'))
