@@ -1,11 +1,12 @@
 from travelplanner.route import Route
 from travelplanner import read_passengers
+from travelplanner.passengers import Passenger
 import matplotlib.pyplot as plt
 import math
 
 
 class Journey:
-    def __init__(self, route, passengers):
+    def __init__(self, passengers, route):
         self.route = route
         self.passenger = passengers
 
@@ -54,7 +55,28 @@ class Journey:
             bus_times[walk_distance_stops[0][1]]
         walk_travel = walk_distance_stops[0][0] * passengers[passenger_id][2] + \
             walk_distance_stops[1][0] * passengers[passenger_id][2]
-        return bus_travel + walk_travel
+        travel_walk_time = {'bus': bus_travel, 'walk': walk_travel}
+        walk_time = Passenger(*passengers[passenger_id]).walk_time()
+        # bus travel < 0 means the bus has opposite direction of passenger.
+        if walk_time <= bus_travel + walk_travel or bus_travel < 0:
+            time = walk_time
+            print(f'This passenger should just walk for {time} mins.')
+            return {'bus': 0, 'walk': time}
+        else:
+            time = bus_travel + walk_travel
+            print(
+                f'This passenger take a walk for {walk_travel} mins and take a bus for {bus_travel} min.')
+            return travel_walk_time
 
     def print_time_stats(self):
-        pass
+        total_walking_time = 0
+        total_bus_time = 0
+        passengers_number = len(self.passenger)
+        for i in range(passengers_number):
+            time = self.travel_time(i)
+            total_bus_time += time['bus']
+            total_walking_time += time['walk']
+        average_walking_time = total_walking_time / passengers_number
+        average_bus_time = total_bus_time / passengers_number
+        print(f'Average time on bus: {average_bus_time} min')
+        print(f'Average walking time: {average_walking_time} min')
