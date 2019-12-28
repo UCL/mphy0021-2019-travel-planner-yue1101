@@ -59,5 +59,5 @@ def test_timetable():
 
 def test_route_cc():
     route = Route('travelplanner/tests/random_route.csv')
-    assert route.route_cc(route.read_routes()) == ((10, 8),
-                                                   '2222244444446666066666664444')
+    assert route.route_cc(route.read_routes()) == (
+        (10, 8), '2222244444446666066666664444')
