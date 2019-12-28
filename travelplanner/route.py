@@ -12,9 +12,9 @@ class Route:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
                       for line in lines]
-        chain_codes = self.route_cc(routes)
+        results = self.route_cc(routes)
         wrong_directions = ['1', '3', '5', '7']
-        for cc in chain_codes:
+        for cc in results[1]:
             if cc in wrong_directions:
                 assert ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
