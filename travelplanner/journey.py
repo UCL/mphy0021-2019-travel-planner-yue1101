@@ -28,9 +28,9 @@ class Journey:
         closer_end = min(distances)
         return (closer_start, closer_end)
 
-    def plot_bus_load(self):
+    def plot_bus_load(self, savefig=False):
         stops = {step[2]: 0
-                 for step in self.route if step[2]}
+                 for step in self.route.read_routes() if step[2]}
         for passenger in self.passenger:
             trip = self.passenger_trip(passenger)
             stops[trip[0][1]] += 1
@@ -40,9 +40,11 @@ class Journey:
                 stops[stop] += stops[prev]
             prev = stop
         _, ax = plt.subplots()
-        ax.step(range(len(stops)), stops.values(), where='post')
+        ax.step(range(len(stops)), list(stops.values()), where='post')
         ax.set_xticks(range(len(stops)))
         ax.set_xticklabels(list(stops.keys()))
+        if savefig == True:
+            plt.savefig('load.png')
         plt.show()
 
     def travel_time(self, passenger_id):

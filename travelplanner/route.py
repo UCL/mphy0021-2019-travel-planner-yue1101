@@ -19,7 +19,7 @@ class Route:
                 raise ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
 
-    def plot_map(self):
+    def plot_map(self, savefig=False):
         route = self.read_routes()
         max_x = max([n[0] for n in route]) + 5  # adds padding
         max_y = max([n[1] for n in route]) + 5
@@ -32,6 +32,8 @@ class Route:
         ax.pcolor(grid)
         ax.invert_yaxis()
         ax.set_aspect('equal', 'datalim')
+        if savefig == True:
+            plt.savefig('map.png')
         plt.show()
 
     def timetable(self, bus_speed=10):
@@ -44,7 +46,7 @@ class Route:
         for step in route:
             if step[2]:
                 stops[step[2]] = time
-            time += bus_speed
+            time += float(bus_speed)
         return stops
 
     def route_cc(self, route):
