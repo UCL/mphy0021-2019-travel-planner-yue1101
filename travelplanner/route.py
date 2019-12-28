@@ -12,6 +12,11 @@ class Route:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
                       for line in lines]
+        results = self.route_cc(routes)
+        wrong_directions = ['1', '3', '5', '7']
+        for cc in results[1]:
+            if cc in wrong_directions:
+                raise ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
 
     def plot_map(self):
@@ -29,7 +34,7 @@ class Route:
         ax.set_aspect('equal', 'datalim')
         plt.show()
 
-    def timetable(self):
+    def timetable(self, bus_speed=10):
         '''     
         Generates a timetable for a route as minutes from its first stop. 
         '''
@@ -39,10 +44,10 @@ class Route:
         for step in route:
             if step[2]:
                 stops[step[2]] = time
-            time += 10
+            time += bus_speed
         return stops
 
-    def route_cc(self):
+    def route_cc(self, route):
         r'''
         Converts a set of route into a Freeman chain code
            3  2  1
@@ -51,7 +56,6 @@ class Route:
             / | \ 
            5  6  7 
         '''
-        route = self.read_routes()
         start = route[0][:2]
         cc = []
         freeman_cc2coord = {0: (1, 0),
