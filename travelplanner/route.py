@@ -16,7 +16,7 @@ class Route:
         wrong_directions = ['1', '3', '5', '7']
         for cc in results[1]:
             if cc in wrong_directions:
-                assert ValueError('Wrong direction! Cannot go diaganoly!')
+                raise ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
 
     def plot_map(self):
