@@ -6,11 +6,54 @@ import math
 
 
 class Journey:
+    '''
+    Choose the route with least time for every passenger.
+    Return distances walking to the start bus stop and stop name, aliting bus 
+        and walking to the destination and the stop name.
+    Plot load.png to show the load at every bus stop.
+    Print time spent on bus and walking for the passenger.
+    Print average time spent on bus and walking among all the passengers.
+
+    Parameters
+    ----------
+    passengers: list
+        all passengers' information
+
+    route: object
+        a instance of class Route
+
+    Methods
+    -------
+    passenger_trip(self, passenger)
+
+    plot_bus_load(self, savefig=False)
+
+    travel_time(self, passenger_id)
+
+    print_time_stats(self)
+
+    Detail information please see in respective method.
+    '''
+
     def __init__(self, passengers, route):
         self.route = route
         self.passenger = passengers
 
     def passenger_trip(self, passenger):
+        '''
+        Give the start and end stops and the distances from taking the bus.
+
+        Parameters
+        ----------
+        passenger: tuple,
+            The information of passsenger : (start, end, speed)
+
+        Returns
+        --------
+        tuple
+            ((The distance passenger walking to bus stop, stop),
+             (The distance passenger walking to destination alite the bus, stop))
+        '''
         start, end, _ = passenger
         stops = [value for value in self.route.read_routes() if value[2]]
         # calculate closer stops
@@ -29,12 +72,22 @@ class Journey:
         return (closer_start, closer_end)
 
     def plot_bus_load(self, savefig=False):
+        '''
+        Plot the number of passengers at every stop
+
+        Parameters
+        -----------
+        savefig: bool, default: False
+            If set savefig to True, load.png will be saved.
+        '''
         stops = {step[2]: 0
                  for step in self.route.read_routes() if step[2]}
         for passenger in self.passenger:
             trip = self.passenger_trip(passenger)
-            stops[trip[0][1]] += 1
-            stops[trip[1][1]] -= 1
+            # passenger and bus have same direction.
+            if trip[0][1] < trip[1][1]:
+                stops[trip[0][1]] += 1
+                stops[trip[1][1]] -= 1
         for i, stop in enumerate(stops):
             if i > 0:
                 stops[stop] += stops[prev]
@@ -48,6 +101,20 @@ class Journey:
         plt.show()
 
     def travel_time(self, passenger_id):
+        '''
+        Give the time needed for walking and taking the bus
+
+        Parameters
+        -----------
+        passenger_id: int
+            choose a random passenger id
+
+        Returns
+        -----------
+        travel_walk_time: dict
+            The dict has two keys: 'bus' and 'walk', and its value is corresponding time
+        '''
+
         passengers = {}
         for i, passenger in enumerate(self.passenger):
             passengers[i] = passenger
@@ -71,6 +138,9 @@ class Journey:
             return travel_walk_time
 
     def print_time_stats(self):
+        '''
+        Print average time spending on bus and average time spent on walking.
+        '''
         total_walking_time = 0
         total_bus_time = 0
         passengers_number = len(self.passenger)

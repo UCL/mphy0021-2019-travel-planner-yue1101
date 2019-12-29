@@ -4,6 +4,18 @@ from .passengers import Passenger
 
 
 def read_passengers(file):
+    '''
+    Transfer raw data random_passenger.csv into another format
+
+    Parameters
+    ----------
+    file: .csv file
+        Contains information of passengers
+
+    Returns
+    -------
+    passengers: list
+    '''
     passengers = np.genfromtxt(file, delimiter=',', dtype='int')
     passengers = passengers.tolist()
     for i, passenger in enumerate(passengers):
