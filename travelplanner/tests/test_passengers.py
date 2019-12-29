@@ -1,5 +1,7 @@
 from travelplanner.passengers import Passenger
 from pytest import approx, raises
+import pytest
+import yaml
 
 
 def test_constructor():
@@ -9,10 +11,20 @@ def test_constructor():
     assert passenger.speed == 10
 
 
-def test_walk_time():
-    person = Passenger((2, 8), (24, 2), 13)
-    time = person.walk_time()
-    assert time == approx(296.4456, abs=1e-4)
+def read_fixture():
+    with open('./travelplanner/tests/fixtures.yml') as ft:
+        fixtures = yaml.safe_load(ft)
+    return fixtures
+
+
+@pytest.mark.parametrize("fixture", read_fixture())
+def test_walk_time(fixture):
+    answer = fixture.pop('answer')
+    start = eval(fixture['start'])
+    end = eval(fixture['end'])
+    speed = fixture['speed']
+    person = Passenger(start, end, speed)
+    assert person.walk_time() == eval(answer)
 
 
 def test_fail_walk_time():

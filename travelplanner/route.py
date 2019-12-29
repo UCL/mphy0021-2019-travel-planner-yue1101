@@ -4,10 +4,42 @@ import numpy as np
 
 
 class Route:
+    '''
+    Read the raw route.csv file into correct format.
+    Return coordination and timepoint for every grid, the timetable of the bus
+        and the freeman chaincode.
+    Plot the bus route and every stop.
+
+    Parameters
+    ----------
+    filename: .csv file
+        contains information of bus route
+
+    Methods
+    -------
+    read_routes(self)
+
+    plot_map(self, savefig=False)
+
+    timetable(self, bus_speed=10)
+
+    route_cc(self, route)
+
+    Detail information please see in respective method.
+    '''
+
     def __init__(self, filename):
         self.filename = filename
 
     def read_routes(self):
+        '''
+        Transfer raw data random_route.csv into another format
+
+        Returns
+        -------
+        routes: list
+            Contains information of grid
+        '''
         with open(self.filename) as fn:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
@@ -20,6 +52,14 @@ class Route:
         return routes
 
     def plot_map(self, savefig=False):
+        '''
+        Plot the bus route and every stop
+
+        Parameters
+        -----------
+        savefig: bool, default: False
+            If set it to True, map.png will be saved.
+        '''
         route = self.read_routes()
         max_x = max([n[0] for n in route]) + 5  # adds padding
         max_y = max([n[1] for n in route]) + 5
@@ -39,6 +79,17 @@ class Route:
     def timetable(self, bus_speed=10):
         '''     
         Generates a timetable for a route as minutes from its first stop. 
+
+        Parameters
+        ----------
+        bus_speed: int or float, default: 10
+            specify bus_speed
+
+        Returns
+        -------
+        stops: dict
+            keys: 'bus stop name'
+            values: timepoint of every stop
         '''
         route = self.read_routes()
         time = 0
@@ -57,6 +108,19 @@ class Route:
         4   - C -   0
             / | \ 
            5  6  7 
+
+        Parameters
+        ----------
+        route: list
+            Contains information of grid
+
+        Returns
+        -------
+        start: tuple
+            the start coordination of bus
+
+        ''.join(cc): string
+            the chaincode of the bus
         '''
         start = route[0][:2]
         cc = []
