@@ -10,7 +10,7 @@ def test_constructor():
 
 def test_fail_read_routes():
     with raises(ValueError) as rs:
-        route = Route('travelplanner/tests/random_route.csv')
+        route = Route('travelplanner/tests/random_route_fail.csv')
         route.read_routes()
     assert rs.type == ValueError
 
