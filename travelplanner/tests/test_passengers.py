@@ -12,7 +12,7 @@ def test_constructor():
 
 
 def read_fixture():
-    with open('./travelplanner/tests/fixture_data.yaml') as ft:
+    with open('./travelplanner/tests/fixtures.yml') as ft:
         fixtures = yaml.safe_load(ft)
     return fixtures
 

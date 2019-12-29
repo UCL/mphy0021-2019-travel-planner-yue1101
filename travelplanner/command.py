@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 from argparse import ArgumentParser
 from .route import Route
-from .journey import Journey
-from travelplanner import read_passengers
+from .journey import Journey, read_passengers
 
 
 def process():
