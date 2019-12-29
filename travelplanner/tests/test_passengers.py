@@ -19,10 +19,12 @@ def read_fixture():
 
 @pytest.mark.parametrize("fixture", read_fixture())
 def test_walk_time(fixture):
-    for ft in fixture:
-        answer = ft.pop('answer')
-        person = Passenger(**ft)
-        assert person.walk_time() == answer
+    answer = fixture.pop('answer')
+    start = eval(fixture['start'])
+    end = eval(fixture['end'])
+    speed = eval(fixture['speed'])
+    person = Passenger(start, end, speed)
+    assert person.walk_time() == answer
 
 
 def test_fail_walk_time():
