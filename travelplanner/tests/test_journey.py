@@ -1,6 +1,5 @@
-from travelplanner.journey import Journey
+from travelplanner.journey import Journey, read_passengers
 from travelplanner.route import Route
-from travelplanner import read_passengers
 from pytest import approx
 
 
