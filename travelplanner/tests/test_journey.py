@@ -17,7 +17,8 @@ def test_passenger_trip():
     journey = Journey(passengers, route)
     passenger = passengers[0]
     assert journey.passenger_trip(passenger) == (
-        (approx(1.4142135623730951, abs=1e-4), 'B'), (approx(10.816653826391969, abs=1e-4), 'A'))
+        (approx(1.4142135623730951, abs=1e-4), 'B'),
+        (approx(10.816653826391969, abs=1e-4), 'A'))
 
 
 def test_travel_time():
