@@ -31,7 +31,7 @@ def read_passengers(file):
 class Journey:
     '''
     Choose the route with least time for every passenger.
-    Return distances walking to the start bus stop and stop name, aliting bus 
+    Return distances walking to the start bus stop and stop name, aliting bus
         and walking to the destination and the stop name.
     Plot load.png to show the load at every bus stop.
     Print time spent on bus and walking for the passenger.
@@ -119,7 +119,7 @@ class Journey:
         ax.step(range(len(stops)), list(stops.values()), where='post')
         ax.set_xticks(range(len(stops)))
         ax.set_xticklabels(list(stops.keys()))
-        if savefig == True:
+        if savefig is True:
             plt.savefig('load.png')
         plt.show()
 

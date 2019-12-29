@@ -10,8 +10,7 @@ def test_constructor():
 
 def test_fail_read_routes():
     with raises(ValueError) as rs:
-        route = Route('travelplanner/tests/random_route_fail.csv')
-        route.read_routes()
+        Route('travelplanner/tests/random_route_fail.csv')
     assert rs.type == ValueError
 
 
@@ -103,3 +102,9 @@ def test_route_cc():
     assert route.route_cc(route.read_routes()) == (
         (18, 6), '6666666664444444444222220066666444444444' +
         '4666666666666000000000666666')
+
+
+def test_plot_map():
+    route = Route('travelplanner/tests/random_route.csv')
+    route.plot_map(savefig=True)
+    assert os.path.exists('map.png') is True

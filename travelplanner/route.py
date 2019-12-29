@@ -30,6 +30,11 @@ class Route:
 
     def __init__(self, filename):
         self.filename = filename
+        results = self.route_cc(self.read_routes())
+        wrong_directions = ['1', '3', '5', '7']
+        for cc in results[1]:
+            if cc in wrong_directions:
+                raise ValueError("Route shouldn't accept diagonal moves")
 
     def read_routes(self):
         '''
@@ -44,11 +49,6 @@ class Route:
             lines = csv.reader(fn)
             routes = [(int(line[0]), int(line[1]), line[2])
                       for line in lines]
-        results = self.route_cc(routes)
-        wrong_directions = ['1', '3', '5', '7']
-        for cc in results[1]:
-            if cc in wrong_directions:
-                raise ValueError('Wrong direction! Cannot go diaganoly!')
         return routes
 
     def plot_map(self, savefig=False):
@@ -72,13 +72,13 @@ class Route:
         ax.pcolor(grid)
         ax.invert_yaxis()
         ax.set_aspect('equal', 'datalim')
-        if savefig == True:
+        if savefig is True:
             plt.savefig('map.png')
         plt.show()
 
     def timetable(self, bus_speed=10):
-        '''     
-        Generates a timetable for a route as minutes from its first stop. 
+        '''
+        Generates a timetable for a route as minutes from its first stop.
 
         Parameters
         ----------
@@ -104,10 +104,10 @@ class Route:
         r'''
         Converts a set of route into a Freeman chain code
            3  2  1
-            \ | / 
+            \ | /
         4   - C -   0
-            / | \ 
-           5  6  7 
+            / | \
+           5  6  7
 
         Parameters
         ----------
