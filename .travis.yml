@@ -8,5 +8,6 @@ install:
 # command to run tests
 script:
   - pytest -v --pep8 travelplanner/tests/test_passengers.py
+  - pytest --doctest-modules travelplanner/tests/test_passengers.py
   - pytest -v --pep8 travelplanner/tests/test_route.py
   - pytest -v --pep8 travelplanner/tests/test_journey.py
