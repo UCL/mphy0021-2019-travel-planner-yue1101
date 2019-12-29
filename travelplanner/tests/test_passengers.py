@@ -24,7 +24,7 @@ def test_walk_time(fixture):
     end = eval(fixture['end'])
     speed = fixture['speed']
     person = Passenger(start, end, speed)
-    assert person.walk_time() == answer
+    assert person.walk_time() == eval(answer)
 
 
 def test_fail_walk_time():
